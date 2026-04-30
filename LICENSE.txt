@@ -1,0 +1,10 @@
+Proprietary License
+
+© 2026 ceob68 / Vaultly. All rights reserved.
+
+1. This software is proprietary and confidential.
+2. Unauthorized copying, distribution, or modification of this software, via any medium, is strictly prohibited.
+3. This license allows the purchaser personal use only.
+4. Reverse engineering, decompilation, and disassembly are prohibited.
+
+For support or commercial licenses, contact the developer through Vaultly.
