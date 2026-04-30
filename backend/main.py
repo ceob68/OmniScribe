@@ -9,7 +9,15 @@ import asyncio
 
 # © 2026 ceob68 / Vaultly. All rights reserved.
 
-app = FastAPI(title="OmniScribe API")
+from contextlib import asynccontextmanager
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Load model in background to not block startup
+    asyncio.create_task(engine.initialize_async())
+    yield
+
+app = FastAPI(title="OmniScribe API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
@@ -20,11 +28,6 @@ app.add_middleware(
 )
 
 engine = TranscriptionEngine()
-
-@app.on_event("startup")
-async def startup_event():
-    # Load model in background to not block startup
-    asyncio.create_task(engine.initialize_async())
 
 @app.websocket("/api/v1/stream")
 async def websocket_endpoint(websocket: WebSocket):
